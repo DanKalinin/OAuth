@@ -91,6 +91,20 @@ static NSString *const OAuthResponseTypeToken = @"token";
     return expired;
 }
 
+- (NSString *)description {
+    NSString *accessToken = [NSString stringWithFormat:@"%@ - %@", OAuthAccessTokenKey, self.accessToken];
+    NSString *tokenType = [NSString stringWithFormat:@"%@ - %@", OAuthTokenTypeKey, self.tokenType];
+    NSString *expiresIn = [NSString stringWithFormat:@"%@ - %f", OAuthExpiresInKey, [self.expirationDate timeIntervalSinceNow]];
+    NSString *refreshToken = [NSString stringWithFormat:@"%@ - %@", OAuthRefreshTokenKey, self.refreshToken];
+    
+    NSArray *descriptions = @[accessToken, tokenType, expiresIn, refreshToken];
+    NSString *description = [descriptions componentsJoinedByString:@"\n"];
+    
+    return description;
+}
+
+#pragma mark - Keychain
+
 - (void)exportToKeychain:(NSString *)account {
     NSData *credential = [NSKeyedArchiver archivedDataWithRootObject:self];
     

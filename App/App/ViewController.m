@@ -50,7 +50,7 @@
     
     // 2 - Token
     
-    oauthClient.code = @"MDkyY2QwNzlkZmQ0YzQ5NjE4MTljMDBhYzBkZWE2ODBlY2YzZDBhZDBmNDkzOWJkYmJlOWQyYTQzMjc2ZmE1MQ";
+    oauthClient.code = @"NTIwNDUyZTkwMDVkMjRjMDJiYTE4NTQ4MjNiZmI1MzVhNGQ2MGQ2YTJhZmRhNjgxN2ZiYjY5ZTA0MTQ1YjQ4OA";
     [oauthClient getCredential:^(OAuthCredential *credential, NSError *error) {
         
     }];
