@@ -10,6 +10,10 @@
 #import <Helpers/Helpers.h>
 #import <URLTransaction/URLTransaction.h>
 
+typedef void (^OAuthRequestHandler)(OAuthCredential *, NSError *);
+
+NSString *const OAuthErrorDomain = @"OAuthErrorDomain";
+
 NSString *const OAuthGrantTypeAuthorizationCode = @"authorization_code";
 NSString *const OAuthGrantTypeImplicit = @"implicit";
 NSString *const OAuthGrantTypeResourceOwnerPasswordCredentials = @"password";
@@ -59,22 +63,6 @@ static NSString *const OAuthResponseTypeToken = @"token";
 
 
 @implementation OAuthCredential
-
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
-    self = [super init];
-    if (self) {
-        self.accessToken = dictionary[OAuthAccessTokenKey];
-        self.tokenType = dictionary[OAuthTokenTypeKey];
-        self.refreshToken = dictionary[OAuthRefreshTokenKey];
-        
-        self.expirationDate = [NSDate distantFuture];
-        NSNumber *expiresIn = dictionary[OAuthExpiresInKey];
-        if (expiresIn && expiresIn.doubleValue > 0.0) {
-            self.expirationDate = [NSDate dateWithTimeIntervalSinceNow:expiresIn.doubleValue];
-        }
-    }
-    return self;
-}
 
 #pragma mark - Serialization
 
@@ -177,7 +165,7 @@ static NSString *const OAuthResponseTypeToken = @"token";
     return request;
 }
 
-- (void)getCredential:(void (^)(OAuthCredential *, NSError *))completion {
+- (void)getCredential:(OAuthRequestHandler)completion {
     NSURLComponents *components = self.authorizationServerBaseComponents.copy;
     components.path = self.tokenEndpoint;
     
@@ -193,13 +181,19 @@ static NSString *const OAuthResponseTypeToken = @"token";
     request.HTTPBody = queryData;
     
     [[[request success:^(NSURLRequest *request) {
-        NSLog(@"OK - %@", request.json);
+        NSDictionary *dictionary = request.json;
+        OAuthCredential *credential = [self credentialWithDictionary:dictionary];
+        [self invokeHandler:completion credential:credential error:nil];
+        NSLog(@"credential - %@", credential);
     }] failure:^(NSURLRequest *request) {
-        NSLog(@"ERROR - %@", request.json);
+        NSDictionary *dictionary = request.json;
+        NSError *error = [self errorWithDictionary:dictionary underlyingError:request.error];
+        [self invokeHandler:completion credential:nil error:error];
+        NSLog(@"error - %@", error);
     }] resume];
 }
 
-- (void)refreshCredential:(OAuthCredential *)oldCredential completion:(void (^)(OAuthCredential *, NSError *))completion {
+- (void)refreshCredential:(OAuthCredential *)oldCredential completion:(OAuthRequestHandler)completion {
     
 }
 
@@ -255,6 +249,48 @@ static NSString *const OAuthResponseTypeToken = @"token";
     [queryItems filterUsingPredicate:predicate];
     
     return queryItems;
+}
+
+- (void)invokeHandler:(OAuthRequestHandler)handler credential:(OAuthCredential *)credential error:(NSError *)error {
+    if (handler) {
+        handler(credential, error);
+    }
+}
+
+- (OAuthCredential *)credentialWithDictionary:(NSDictionary *)dictionary {
+    OAuthCredential *credential = [OAuthCredential new];
+    
+    credential.accessToken = dictionary[OAuthAccessTokenKey];
+    credential.tokenType = dictionary[OAuthTokenTypeKey];
+    credential.refreshToken = dictionary[OAuthRefreshTokenKey];
+    
+    credential.expirationDate = [NSDate distantFuture];
+    NSNumber *expiresIn = dictionary[OAuthExpiresInKey];
+    if (expiresIn && expiresIn.doubleValue > 0.0) {
+        credential.expirationDate = [NSDate dateWithTimeIntervalSinceNow:expiresIn.doubleValue];
+    }
+    
+    return credential;
+}
+
+- (NSError *)errorWithDictionary:(NSDictionary *)dictionary underlyingError:(NSError *)underlyingError {
+    
+    NSString *key = dictionary[OAuthErrorKey];
+    NSString *description = dictionary[OAuthErrorDescriptionKey];
+    NSString *uri = dictionary[OAuthErrorUriKey];
+    
+    if (!description) {
+        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+        description = [bundle localizedStringForKey:key value:key table:@"Errors"];
+    }
+    
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    userInfo[NSLocalizedDescriptionKey] = description;
+    userInfo[NSURLErrorKey] = [NSURL URLWithString:uri];
+    userInfo[NSUnderlyingErrorKey] = underlyingError;
+    
+    NSError *error = [NSError errorWithDomain:OAuthErrorDomain code:0 userInfo:userInfo];
+    return error;
 }
 
 @end

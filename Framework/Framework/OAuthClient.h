@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const OAuthErrorDomain;
+
 extern NSString *const OAuthGrantTypeAuthorizationCode;
 extern NSString *const OAuthGrantTypeImplicit;
 extern NSString *const OAuthGrantTypeResourceOwnerPasswordCredentials;
