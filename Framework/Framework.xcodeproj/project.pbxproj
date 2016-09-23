@@ -1,0 +1,398 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		374392761D9276F5005E1075 /* OAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 374392741D9276F5005E1075 /* OAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		374392BA1D9278C8005E1075 /* Helpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374392A91D92783F005E1075 /* Helpers.framework */; };
+		374392BB1D9278C8005E1075 /* URLTransaction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374392AF1D92784B005E1075 /* URLTransaction.framework */; };
+		374392D51D9342BA005E1075 /* OAuthClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 374392D31D9342BA005E1075 /* OAuthClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		374392D61D9342BA005E1075 /* OAuthClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 374392D41D9342BA005E1075 /* OAuthClient.m */; };
+		374392ED1D949FC0005E1075 /* Errors.strings in Resources */ = {isa = PBXBuildFile; fileRef = 374392EC1D949FC0005E1075 /* Errors.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		374392A81D92783F005E1075 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 374392A41D92783F005E1075 /* Framework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3743921C1D91EED7005E1075;
+			remoteInfo = Helpers;
+		};
+		374392AE1D92784B005E1075 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 374392AA1D92784B005E1075 /* Framework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3717703C1D8B05BB0027C322;
+			remoteInfo = URLTransaction;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		374392711D9276F5005E1075 /* OAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		374392741D9276F5005E1075 /* OAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuth.h; sourceTree = "<group>"; };
+		374392751D9276F5005E1075 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		374392A41D92783F005E1075 /* Framework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Framework.xcodeproj; path = ../../../../Helpers/Framework/Framework.xcodeproj; sourceTree = "<group>"; };
+		374392AA1D92784B005E1075 /* Framework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Framework.xcodeproj; path = ../../../../URLTransaction/Framework/Framework.xcodeproj; sourceTree = "<group>"; };
+		374392D31D9342BA005E1075 /* OAuthClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthClient.h; sourceTree = "<group>"; };
+		374392D41D9342BA005E1075 /* OAuthClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthClient.m; sourceTree = "<group>"; };
+		374392EC1D949FC0005E1075 /* Errors.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Errors.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3743926D1D9276F5005E1075 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				374392BA1D9278C8005E1075 /* Helpers.framework in Frameworks */,
+				374392BB1D9278C8005E1075 /* URLTransaction.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		374392671D9276F5005E1075 = {
+			isa = PBXGroup;
+			children = (
+				374392A11D92782B005E1075 /* Frameworks */,
+				374392731D9276F5005E1075 /* Framework */,
+				374392721D9276F5005E1075 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		374392721D9276F5005E1075 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				374392711D9276F5005E1075 /* OAuth.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		374392731D9276F5005E1075 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				374392741D9276F5005E1075 /* OAuth.h */,
+				374392D31D9342BA005E1075 /* OAuthClient.h */,
+				374392D41D9342BA005E1075 /* OAuthClient.m */,
+				374392751D9276F5005E1075 /* Info.plist */,
+				374392EC1D949FC0005E1075 /* Errors.strings */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		374392A11D92782B005E1075 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				374392A21D92782B005E1075 /* Helpers */,
+				374392A31D92782B005E1075 /* URLTransaction */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		374392A21D92782B005E1075 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				374392A41D92783F005E1075 /* Framework.xcodeproj */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		374392A31D92782B005E1075 /* URLTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				374392AA1D92784B005E1075 /* Framework.xcodeproj */,
+			);
+			path = URLTransaction;
+			sourceTree = "<group>";
+		};
+		374392A51D92783F005E1075 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				374392A91D92783F005E1075 /* Helpers.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		374392AB1D92784B005E1075 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				374392AF1D92784B005E1075 /* URLTransaction.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3743926E1D9276F5005E1075 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				374392D51D9342BA005E1075 /* OAuthClient.h in Headers */,
+				374392761D9276F5005E1075 /* OAuth.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		374392701D9276F5005E1075 /* OAuth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 374392791D9276F5005E1075 /* Build configuration list for PBXNativeTarget "OAuth" */;
+			buildPhases = (
+				3743926C1D9276F5005E1075 /* Sources */,
+				3743926D1D9276F5005E1075 /* Frameworks */,
+				3743926E1D9276F5005E1075 /* Headers */,
+				3743926F1D9276F5005E1075 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OAuth;
+			productName = Framework;
+			productReference = 374392711D9276F5005E1075 /* OAuth.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		374392681D9276F5005E1075 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Dan Kalinin";
+				TargetAttributes = {
+					374392701D9276F5005E1075 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3743926B1D9276F5005E1075 /* Build configuration list for PBXProject "Framework" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 374392671D9276F5005E1075;
+			productRefGroup = 374392721D9276F5005E1075 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 374392A51D92783F005E1075 /* Products */;
+					ProjectRef = 374392A41D92783F005E1075 /* Framework.xcodeproj */;
+				},
+				{
+					ProductGroup = 374392AB1D92784B005E1075 /* Products */;
+					ProjectRef = 374392AA1D92784B005E1075 /* Framework.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				374392701D9276F5005E1075 /* OAuth */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		374392A91D92783F005E1075 /* Helpers.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Helpers.framework;
+			remoteRef = 374392A81D92783F005E1075 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		374392AF1D92784B005E1075 /* URLTransaction.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = URLTransaction.framework;
+			remoteRef = 374392AE1D92784B005E1075 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3743926F1D9276F5005E1075 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				374392ED1D949FC0005E1075 /* Errors.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3743926C1D9276F5005E1075 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				374392D61D9342BA005E1075 /* OAuthClient.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		374392771D9276F5005E1075 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		374392781D9276F5005E1075 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3743927A1D9276F5005E1075 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Framework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dk.OAuth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3743927B1D9276F5005E1075 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Framework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dk.OAuth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3743926B1D9276F5005E1075 /* Build configuration list for PBXProject "Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				374392771D9276F5005E1075 /* Debug */,
+				374392781D9276F5005E1075 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		374392791D9276F5005E1075 /* Build configuration list for PBXNativeTarget "OAuth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3743927A1D9276F5005E1075 /* Debug */,
+				3743927B1D9276F5005E1075 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 374392681D9276F5005E1075 /* Project object */;
+}
