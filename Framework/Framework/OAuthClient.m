@@ -19,6 +19,8 @@ NSString *const OAuthGrantTypeImplicit = @"implicit";
 NSString *const OAuthGrantTypeResourceOwnerPasswordCredentials = @"password";
 NSString *const OAuthGrantTypeClientCredentials = @"client_credentials";
 
+static NSString *const OAuthGrantTypeRefreshToken = @"refresh_token";
+
 static NSString *const OAuthAccessTokenKey = @"access_token";
 static NSString *const OAuthTokenTypeKey = @"token_type";
 static NSString *const OAuthExpiresInKey = @"expires_in";
@@ -199,7 +201,11 @@ static NSString *const OAuthResponseTypeToken = @"token";
     self.authorize = NO;
     self.refreshToken = oldCredential.refreshToken;
     
+    NSString *grantType = self.grantType;
+    self.grantType = OAuthGrantTypeRefreshToken;
     NSURLRequest *request = [self credentialRequest:completion];
+    self.grantType = grantType;
+    
     [request resume];
 }
 

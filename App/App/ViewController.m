@@ -53,9 +53,11 @@
     
     // 2 - Token
     
-    oauthClient.code = @"NTIwNDUyZTkwMDVkMjRjMDJiYTE4NTQ4MjNiZmI1MzVhNGQ2MGQ2YTJhZmRhNjgxN2ZiYjY5ZTA0MTQ1YjQ4OA";
+    oauthClient.code = @"YzJkMDVjN2QxYmEyYmY1OGNhZDEyZjZlOThiYTU1MjFlMGVjYTAxMzE1ZjFiOThmMDYyNjIyZmI1ZTNhYjY0ZA";
     [oauthClient getCredential:^(OAuthCredential *credential, NSError *error) {
-        
+        [oauthClient refreshCredential:credential completion:^(OAuthCredential *newCredential, NSError *error) {
+            
+        }];
     }];
 }
 
