@@ -13,6 +13,8 @@
 		374392D51D9342BA005E1075 /* OAuthClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 374392D31D9342BA005E1075 /* OAuthClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		374392D61D9342BA005E1075 /* OAuthClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 374392D41D9342BA005E1075 /* OAuthClient.m */; };
 		374392ED1D949FC0005E1075 /* Errors.strings in Resources */ = {isa = PBXBuildFile; fileRef = 374392EC1D949FC0005E1075 /* Errors.strings */; };
+		374392FF1D96D12C005E1075 /* OAuthWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 374392FD1D96D12C005E1075 /* OAuthWebView.h */; };
+		374393001D96D12C005E1075 /* OAuthWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 374392FE1D96D12C005E1075 /* OAuthWebView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,8 @@
 		374392D31D9342BA005E1075 /* OAuthClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthClient.h; sourceTree = "<group>"; };
 		374392D41D9342BA005E1075 /* OAuthClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthClient.m; sourceTree = "<group>"; };
 		374392EC1D949FC0005E1075 /* Errors.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Errors.strings; sourceTree = "<group>"; };
+		374392FD1D96D12C005E1075 /* OAuthWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthWebView.h; sourceTree = "<group>"; };
+		374392FE1D96D12C005E1075 /* OAuthWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthWebView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 				374392741D9276F5005E1075 /* OAuth.h */,
 				374392D31D9342BA005E1075 /* OAuthClient.h */,
 				374392D41D9342BA005E1075 /* OAuthClient.m */,
+				374392FD1D96D12C005E1075 /* OAuthWebView.h */,
+				374392FE1D96D12C005E1075 /* OAuthWebView.m */,
 				374392751D9276F5005E1075 /* Info.plist */,
 				374392EC1D949FC0005E1075 /* Errors.strings */,
 			);
@@ -135,6 +141,7 @@
 			files = (
 				374392D51D9342BA005E1075 /* OAuthClient.h in Headers */,
 				374392761D9276F5005E1075 /* OAuth.h in Headers */,
+				374392FF1D96D12C005E1075 /* OAuthWebView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				374392D61D9342BA005E1075 /* OAuthClient.m in Sources */,
+				374393001D96D12C005E1075 /* OAuthWebView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
