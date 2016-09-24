@@ -73,50 +73,8 @@ typedef NS_ENUM(NSInteger, OAuthAuthenticationScheme) {
 @property NSString *username;
 @property NSString *password;
 
-- (NSURLRequest *)authorizationCodeRequest;
+- (NSURLRequest *)authorizationRequest;
 - (void)getCredential:(void (^)(OAuthCredential *credential, NSError *error))completion;
 - (void)refreshCredential:(OAuthCredential *)oldCredential completion:(void (^)(OAuthCredential *newCredential, NSError *error))completion;
 
 @end
-
-
-//NS_ASSUME_NONNULL_BEGIN
-//
-//@interface NSMutableURLRequest (OAuth)
-//
-//#pragma mark - Authorization code grant
-//
-//+ (instancetype)authorizationCodeRequest:(NSString *)responseType clientId:(NSString *)clientId redirectUri:(nullable NSString *)redirectUri scope:(nullable NSString *)scope state:(nullable NSString *)state;
-//+ (instancetype)accessTokenRequest:(NSString *)grantType code:(NSString *)code redirectUri:(NSString *)redirectUri clientId:(NSString *)clientId;
-//
-//#pragma mark - Implicit grant
-//
-//+ (instancetype)accessTokenRequest:(NSString *)responseType clientId:(NSString *)clientId redirectUri:(nullable NSString *)redirectUri scope:(nullable NSString *)scope state:(nullable NSString *)state;
-//
-//#pragma mark - Resource owner password credentials grant
-//
-//+ (instancetype)accessTokenRequest:(NSString *)grantType username:(NSString *)userName password:(NSString *)password scope:(nullable NSString *)scope;
-//
-//#pragma mark - Client credentials grant
-//
-//+ (instancetype)accessTokenRequest:(NSString *)grantType scope:(nullable NSString *)scope;
-//
-//#pragma mark - Refresh access token
-//
-//+ (instancetype)accessTokenRequest:(NSString *)grantType refreshToken:(NSString *)refreshToken scope:(nullable NSString *)scope;
-//
-//@end
-//
-//
-////@interface OAuthClient : NSObject
-////
-////@property NSString *grantType;
-////@property NSString *clientId;
-////@property NSString *redirectUri;
-////@property NSString *userName;
-////@property NSString *password;
-////@property NSString *scope;
-////
-////@end
-//
-//NS_ASSUME_NONNULL_END

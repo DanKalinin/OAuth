@@ -170,16 +170,16 @@ static NSString *const OAuthResponseTypeToken = @"token";
     return self;
 }
 
-- (NSURLRequest *)authorizationCodeRequest {
+- (NSURLRequest *)authorizationRequest {
     
-    if ([self.grantType isEqualToString:OAuthGrantTypeAuthorizationCode]) return nil;
-    
-    NSURLComponents *components = self.authorizationServerBaseComponents.copy;
-    components.path = self.authorizationEndpoint;
+    if (![self.grantType isEqualToString:OAuthGrantTypeAuthorizationCode] && ![self.grantType isEqualToString:OAuthGrantTypeImplicit]) return nil;
     
     self.refresh = NO;
     self.authorize = YES;
-    self.responseType = OAuthResponseTypeCode;
+    self.responseType = [self.grantType isEqualToString:OAuthGrantTypeAuthorizationCode] ? OAuthResponseTypeCode : OAuthResponseTypeToken;
+    
+    NSURLComponents *components = self.authorizationServerBaseComponents.copy;
+    components.path = self.authorizationEndpoint;
     components.queryItems = [self queryItems];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:components.URL];
@@ -282,7 +282,7 @@ static NSString *const OAuthResponseTypeToken = @"token";
                 names = @[OAuthGrantType, OAuthCode, OAuthRedirectUri].mutableCopy;
             }
         } else if ([self.grantType isEqualToString:OAuthGrantTypeImplicit]) {
-            names = @[OAuthResponseType, OAuthRedirectUri, OAuthScope, OAuthState].mutableCopy;
+            names = @[OAuthResponseType, OAuthClientId, OAuthRedirectUri, OAuthScope, OAuthState].mutableCopy;
         } else if ([self.grantType isEqualToString:OAuthGrantTypeResourceOwnerPasswordCredentials]) {
             if (self.authorize) {
                 names = @[].mutableCopy;

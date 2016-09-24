@@ -44,12 +44,12 @@
     
     // 1 - Authorization
     
-    oauthClient.grantType = OAuthGrantTypeResourceOwnerPasswordCredentials;
+    oauthClient.grantType = OAuthGrantTypeClientCredentials;
     oauthClient.username = @"papa10";
     oauthClient.password = @"11111111";
     oauthClient.state = @"123";
     
-//    NSLog(@"request - %@", [oauthClient authorizationCodeRequest]);
+    NSLog(@"request - %@", [oauthClient authorizationRequest]);
     
     // 2 - Token
     
