@@ -70,6 +70,8 @@ typedef NS_ENUM(NSInteger, OAuthAuthenticationScheme) {
 @property NSString *scope;
 @property NSString *state;
 @property NSString *code;
+@property NSString *username;
+@property NSString *password;
 
 - (NSURLRequest *)authorizationCodeRequest;
 - (void)getCredential:(void (^)(OAuthCredential *credential, NSError *error))completion;

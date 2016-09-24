@@ -256,6 +256,8 @@ static NSString *const OAuthResponseTypeToken = @"token";
     NSURLQueryItem *codeItem = [NSURLQueryItem queryItemWithName:OAuthCode value:self.code];
     NSURLQueryItem *grantTypeItem = [NSURLQueryItem queryItemWithName:OAuthGrantType value:self.grantType];
     NSURLQueryItem *refreshTokenItem = [NSURLQueryItem queryItemWithName:OAuthRefreshToken value:self.refreshToken];
+    NSURLQueryItem *usernameItem = [NSURLQueryItem queryItemWithName:OAuthUsername value:self.username];
+    NSURLQueryItem *passwordItem = [NSURLQueryItem queryItemWithName:OAuthPassword value:self.password];
     
     [queryItems addObject:responseTypeItem];
     [queryItems addObject:clientIdItem];
@@ -266,6 +268,8 @@ static NSString *const OAuthResponseTypeToken = @"token";
     [queryItems addObject:codeItem];
     [queryItems addObject:grantTypeItem];
     [queryItems addObject:refreshTokenItem];
+    [queryItems addObject:usernameItem];
+    [queryItems addObject:passwordItem];
     
     NSMutableArray *names;
     if (self.refresh) {
