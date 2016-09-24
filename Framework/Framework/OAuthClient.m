@@ -25,6 +25,7 @@ static NSString *const OAuthAccessTokenKey = @"access_token";
 static NSString *const OAuthTokenTypeKey = @"token_type";
 static NSString *const OAuthExpiresInKey = @"expires_in";
 static NSString *const OAuthRefreshTokenKey = @"refresh_token";
+static NSString *const OAuthCodeKey = @"code";
 
 static NSString *const OAuthErrorKey = @"error";
 static NSString *const OAuthErrorDescriptionKey = @"error_description";
@@ -205,8 +206,27 @@ static NSString *const OAuthResponseTypeToken = @"token";
     self.grantType = OAuthGrantTypeRefreshToken;
     NSURLRequest *request = [self credentialRequest:completion];
     self.grantType = grantType;
-    
     [request resume];
+}
+
+- (NSString *)codeWithURL:(NSURL *)URL {
+    NSURLComponents *components = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
+    
+    NSDictionary *dictionary = [self dictionaryWithQueryItems:components.queryItems];
+    NSString *code = dictionary[OAuthCodeKey];
+    return code;
+}
+
+- (OAuthCredential *)credentialWithURL:(NSURL *)URL {
+    NSURLComponents *components = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
+    
+    NSMutableArray *queryItems = components.queryItems.mutableCopy;
+    components.query = components.fragment;
+    [queryItems addObjectsFromArray:components.queryItems];
+    
+    NSDictionary *dictionary = [self dictionaryWithQueryItems:queryItems];
+    OAuthCredential *credential = [self credentialWithDictionary:dictionary];
+    return credential;
 }
 
 #pragma mark - Helpers
@@ -358,6 +378,14 @@ static NSString *const OAuthResponseTypeToken = @"token";
     
     NSError *error = [NSError errorWithDomain:OAuthErrorDomain code:0 userInfo:userInfo];
     return error;
+}
+
+- (NSDictionary *)dictionaryWithQueryItems:(NSArray<NSURLQueryItem *> *)queryItems {
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    for (NSURLQueryItem *queryItem in queryItems) {
+        dictionary[queryItem.name] = queryItem.value;
+    }
+    return dictionary;
 }
 
 @end

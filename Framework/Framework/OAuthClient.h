@@ -77,4 +77,7 @@ typedef NS_ENUM(NSInteger, OAuthAuthenticationScheme) {
 - (void)getCredential:(void (^)(OAuthCredential *credential, NSError *error))completion;
 - (void)refreshCredential:(OAuthCredential *)oldCredential completion:(void (^)(OAuthCredential *newCredential, NSError *error))completion;
 
+- (NSString *)codeWithURL:(NSURL *)URL;
+- (OAuthCredential *)credentialWithURL:(NSURL *)URL;
+
 @end

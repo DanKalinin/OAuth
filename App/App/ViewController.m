@@ -44,7 +44,7 @@
     
     // 1 - Authorization
     
-    oauthClient.grantType = OAuthGrantTypeClientCredentials;
+    oauthClient.grantType = OAuthGrantTypeImplicit;
     oauthClient.username = @"papa10";
     oauthClient.password = @"11111111";
     oauthClient.state = @"123";
@@ -57,6 +57,13 @@
     [oauthClient getCredential:^(OAuthCredential *credential, NSError *error) {
         [oauthClient refreshCredential:credential completion:^(OAuthCredential *newCredential, NSError *error) {
             
+            NSURL *codeURL = [NSURL URLWithString:@"http://client.ios/?state=123&code=ZTIwZDNkY2Y0ZWVmNWVhMjkxOGVlMDYzMTEyY2QzYjNjYjZmYTdlY2JjZTVhMDU4MDFmM2ViZjhmMzM4M2ZlZA"];
+            NSString *code = [oauthClient codeWithURL:codeURL];
+            NSLog(@"code - %@", code);
+            
+            NSURL *credentialURL = [NSURL URLWithString:@"http://client.ios/?state=123#access_token=ZGY1NzNlODI0YWFmOThlZDc3NDY0YWY0ZjU4MmFlZjUwZGQwYzMxYWZiMjFhZDI1MDU2ZGIxNzcwYzc3NGVkNA&expires_in=3600&token_type=bearer"];
+            OAuthCredential *credential = [oauthClient credentialWithURL:credentialURL];
+            NSLog(@"credential - %@", credential);
         }];
     }];
 }
