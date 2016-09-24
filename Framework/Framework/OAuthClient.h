@@ -15,6 +15,12 @@ extern NSString *const OAuthGrantTypeImplicit;
 extern NSString *const OAuthGrantTypeResourceOwnerPasswordCredentials;
 extern NSString *const OAuthGrantTypeClientCredentials;
 
+typedef NS_ENUM(NSInteger, OAuthAuthenticationScheme) {
+    OAuthAuthenticationSchemeDefault,
+    OAuthAuthenticationSchemeHTTPBasic,
+    OAuthAuthenticationSchemeNone
+};
+
 
 
 
@@ -53,6 +59,8 @@ extern NSString *const OAuthGrantTypeClientCredentials;
 @property (readonly) NSURLComponents *authorizationServerBaseComponents;
 @property (readonly) NSString *clientId;
 @property (readonly) NSString *clientSecret;
+
+@property OAuthAuthenticationScheme authenticationScheme;
 
 @property NSString *authorizationEndpoint;
 @property NSString *tokenEndpoint;

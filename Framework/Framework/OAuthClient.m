@@ -38,6 +38,7 @@ static NSString *const OAuthGrantType = @"grant_type";
 static NSString *const OAuthCode = @"code";
 static NSString *const OAuthUsername = @"username";
 static NSString *const OAuthPassword = @"password";
+static NSString *const OAuthRefreshToken = @"refresh_token";
 
 static NSString *const OAuthResponseTypeCode = @"code";
 static NSString *const OAuthResponseTypeToken = @"token";
@@ -142,7 +143,10 @@ static NSString *const OAuthResponseTypeToken = @"token";
 @property NSString *clientSecret;
 
 @property NSString *responseType;
-@property BOOL authorization;
+@property BOOL authorize;
+@property BOOL refresh;
+
+@property NSString *refreshToken;
 
 @end
 
@@ -167,11 +171,14 @@ static NSString *const OAuthResponseTypeToken = @"token";
 }
 
 - (NSURLRequest *)authorizationCodeRequest {
+    
+    if ([self.grantType isEqualToString:OAuthGrantTypeAuthorizationCode]) return nil;
+    
     NSURLComponents *components = self.authorizationServerBaseComponents.copy;
     components.path = self.authorizationEndpoint;
     
-    self.grantType = OAuthGrantTypeAuthorizationCode;
-    self.authorization = YES;
+    self.refresh = NO;
+    self.authorize = YES;
     self.responseType = OAuthResponseTypeCode;
     components.queryItems = [self queryItems];
     
@@ -180,11 +187,30 @@ static NSString *const OAuthResponseTypeToken = @"token";
 }
 
 - (void)getCredential:(OAuthRequestHandler)completion {
+    self.refresh = NO;
+    self.authorize = NO;
+    
+    NSURLRequest *request = [self credentialRequest:completion];
+    [request resume];
+}
+
+- (void)refreshCredential:(OAuthCredential *)oldCredential completion:(OAuthRequestHandler)completion {
+    self.refresh = YES;
+    self.authorize = NO;
+    self.refreshToken = oldCredential.refreshToken;
+    
+    NSURLRequest *request = [self credentialRequest:completion];
+    [request resume];
+}
+
+#pragma mark - Helpers
+
+- (NSURLRequest *)credentialRequest:(OAuthRequestHandler)completion {
+    
     NSURLComponents *components = self.authorizationServerBaseComponents.copy;
     components.path = self.tokenEndpoint;
     
     NSURLComponents *queryComponents = [NSURLComponents new];
-    self.authorization = NO;
     queryComponents.queryItems = [self queryItems];
     NSString *queryString = queryComponents.percentEncodedQuery;
     NSData *queryData = [queryString dataUsingEncoding:NSUTF8StringEncoding];
@@ -194,7 +220,16 @@ static NSString *const OAuthResponseTypeToken = @"token";
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     request.HTTPBody = queryData;
     
-    [[[request success:^(NSURLRequest *request) {
+    if (self.authenticationScheme == OAuthAuthenticationSchemeHTTPBasic) {
+        NSString *credential = [NSString stringWithFormat:@"%@:%@", self.clientId, self.clientSecret];
+        NSData *credentialData = [credential dataUsingEncoding:NSUTF8StringEncoding];
+        NSString *encodedCredential = [credentialData base64EncodedStringWithOptions:0];
+        
+        NSString *value = [NSString stringWithFormat:@"Basic %@", encodedCredential];
+        [request setValue:value forHTTPHeaderField:@"Authorization"];
+    }
+    
+    [[request success:^(NSURLRequest *request) {
         NSDictionary *dictionary = request.json;
         OAuthCredential *credential = [self credentialWithDictionary:dictionary];
         [self invokeHandler:completion credential:credential error:nil];
@@ -204,56 +239,64 @@ static NSString *const OAuthResponseTypeToken = @"token";
         NSError *error = [self errorWithDictionary:dictionary underlyingError:request.error];
         [self invokeHandler:completion credential:nil error:error];
         NSLog(@"error - %@", error);
-    }] resume];
-}
-
-- (void)refreshCredential:(OAuthCredential *)oldCredential completion:(OAuthRequestHandler)completion {
+    }];
     
+    return request;
 }
-
-#pragma mark - Helpers
 
 - (NSArray<NSURLQueryItem *> *)queryItems {
     NSMutableArray *queryItems = [NSMutableArray array];
     
     NSURLQueryItem *responseTypeItem = [NSURLQueryItem queryItemWithName:OAuthResponseType value:self.responseType];
     NSURLQueryItem *clientIdItem = [NSURLQueryItem queryItemWithName:OAuthClientId value:self.clientId];
+    NSURLQueryItem *clientSecretItem = [NSURLQueryItem queryItemWithName:OAuthClientSecret value:self.clientSecret];
     NSURLQueryItem *redirectUriItem = [NSURLQueryItem queryItemWithName:OAuthRedirectUri value:self.clientEndpoint];
     NSURLQueryItem *scopeItem = [NSURLQueryItem queryItemWithName:OAuthScope value:self.scope];
     NSURLQueryItem *stateItem = [NSURLQueryItem queryItemWithName:OAuthState value:self.state];
     NSURLQueryItem *codeItem = [NSURLQueryItem queryItemWithName:OAuthCode value:self.code];
     NSURLQueryItem *grantTypeItem = [NSURLQueryItem queryItemWithName:OAuthGrantType value:self.grantType];
-    NSURLQueryItem *clientSecretItem = [NSURLQueryItem queryItemWithName:OAuthClientSecret value:self.clientSecret];
+    NSURLQueryItem *refreshTokenItem = [NSURLQueryItem queryItemWithName:OAuthRefreshToken value:self.refreshToken];
     
     [queryItems addObject:responseTypeItem];
     [queryItems addObject:clientIdItem];
+    [queryItems addObject:clientSecretItem];
     [queryItems addObject:redirectUriItem];
     [queryItems addObject:scopeItem];
     [queryItems addObject:stateItem];
     [queryItems addObject:codeItem];
     [queryItems addObject:grantTypeItem];
-    [queryItems addObject:clientSecretItem];
+    [queryItems addObject:refreshTokenItem];
     
-    NSArray *names;
-    if ([self.grantType isEqualToString:OAuthGrantTypeAuthorizationCode]) {
-        if (self.authorization) {
-            names = @[OAuthResponseType, OAuthClientId, OAuthRedirectUri, OAuthScope, OAuthState];
-        } else {
-            names = @[OAuthGrantType, OAuthCode, OAuthRedirectUri, OAuthClientId, OAuthClientSecret];
-        }
-    } else if ([self.grantType isEqualToString:OAuthGrantTypeImplicit]) {
-        names = @[OAuthResponseType, OAuthClientId, OAuthRedirectUri, OAuthScope, OAuthState];
-    } else if ([self.grantType isEqualToString:OAuthGrantTypeResourceOwnerPasswordCredentials]) {
-        if (self.authorization) {
-            // Obtain the resource owner credentials - username, password
-            names = @[];
-        } else {
-            names = @[OAuthGrantType, OAuthUsername, OAuthPassword, OAuthScope];
-        }
-    } else if ([self.grantType isEqualToString:OAuthGrantTypeClientCredentials]) {
-        names = @[OAuthGrantType, OAuthScope];
+    NSMutableArray *names;
+    if (self.refresh) {
+        names = @[OAuthGrantType, OAuthRefreshToken, OAuthScope].mutableCopy;
     } else {
-        names = @[];
+        if ([self.grantType isEqualToString:OAuthGrantTypeAuthorizationCode]) {
+            if (self.authorize) {
+                names = @[OAuthResponseType, OAuthClientId, OAuthRedirectUri, OAuthScope, OAuthState].mutableCopy;
+            } else {
+                names = @[OAuthGrantType, OAuthCode, OAuthRedirectUri].mutableCopy;
+            }
+        } else if ([self.grantType isEqualToString:OAuthGrantTypeImplicit]) {
+            names = @[OAuthResponseType, OAuthRedirectUri, OAuthScope, OAuthState].mutableCopy;
+        } else if ([self.grantType isEqualToString:OAuthGrantTypeResourceOwnerPasswordCredentials]) {
+            if (self.authorize) {
+                names = @[].mutableCopy;
+            } else {
+                names = @[OAuthGrantType, OAuthUsername, OAuthPassword, OAuthScope].mutableCopy;
+            }
+        } else if ([self.grantType isEqualToString:OAuthGrantTypeClientCredentials]) {
+            names = @[OAuthGrantType, OAuthScope].mutableCopy;
+        } else {
+            names = @[].mutableCopy;
+        }
+    }
+    
+    if (!self.authorize) {
+        if (self.authenticationScheme == OAuthAuthenticationSchemeDefault) {
+            [names addObject:OAuthClientId];
+            [names addObject:OAuthClientSecret];
+        }
     }
     
     NSPredicate *namePredicate = [NSPredicate predicateWithFormat:@"name IN %@", names];

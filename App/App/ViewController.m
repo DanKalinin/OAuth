@@ -36,6 +36,7 @@
     baseComponents.host = @"content.readyforsky.com";
     
     OAuthClient *oauthClient = [[OAuthClient alloc] initWithAuthorizationServerBaseComponents:baseComponents clientId:@"r4s" clientSecret:@"123"];
+    oauthClient.authenticationScheme = OAuthAuthenticationSchemeHTTPBasic;
     
     oauthClient.authorizationEndpoint = @"/oauth/v2/auth";
     oauthClient.tokenEndpoint = @"/oauth/v2/token";
@@ -43,10 +44,10 @@
     
     // 1 - Authorization
     
-    oauthClient.grantType = OAuthGrantTypeAuthorizationCode;
+    oauthClient.grantType = OAuthGrantTypeClientCredentials;
     oauthClient.state = @"123";
     
-    NSLog(@"request - %@", [oauthClient authorizationCodeRequest]);
+//    NSLog(@"request - %@", [oauthClient authorizationCodeRequest]);
     
     // 2 - Token
     
