@@ -26,6 +26,7 @@ static NSString *const OAuthTokenTypeKey = @"token_type";
 static NSString *const OAuthExpiresInKey = @"expires_in";
 static NSString *const OAuthRefreshTokenKey = @"refresh_token";
 static NSString *const OAuthCodeKey = @"code";
+static NSString *const OAuthStateKey = @"state";
 static NSString *const OAuthMacKeyKey = @"mac_key";
 static NSString *const OAuthMacAlgorithmKey = @"mac_algorithm";
 
@@ -54,6 +55,8 @@ static NSString *const OAuthTokenTypeMac = @"mac";
 static NSString *const OAuthMathAlgorithmHmacSha1 = @"hmac-sha-1";
 static NSString *const OAuthMathAlgorithmHmacSha256 = @"hmac-sha-256";
 
+static NSString *const OAuthErrorsTable = @"Errors";
+static NSString *const OAuthStateErrorDescriptionKey = @"invalid_state";
 
 
 
@@ -200,6 +203,8 @@ static NSString *const OAuthMathAlgorithmHmacSha256 = @"hmac-sha-256";
 
 @property NSString *refreshToken;
 
+@property NSError *stateError;
+
 @end
 
 
@@ -218,6 +223,12 @@ static NSString *const OAuthMathAlgorithmHmacSha256 = @"hmac-sha-256";
         self.clientEndpoint = @"http://client.com";
         
         self.grantType = OAuthGrantTypeAuthorizationCode;
+        
+        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+        NSString *description = [bundle localizedStringForKey:OAuthStateErrorDescriptionKey value:OAuthStateErrorDescriptionKey table:OAuthErrorsTable];
+        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+        userInfo[NSLocalizedDescriptionKey] = description;
+        self.stateError = [NSError errorWithDomain:OAuthErrorDomain code:0 userInfo:userInfo];
     }
     return self;
 }
@@ -258,23 +269,37 @@ static NSString *const OAuthMathAlgorithmHmacSha256 = @"hmac-sha-256";
     [request resume];
 }
 
-- (NSString *)codeWithURL:(NSURL *)URL {
+- (NSString *)codeWithURL:(NSURL *)URL error:(NSError **)error {
     NSURLComponents *components = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     
     NSDictionary *dictionary = [self dictionaryWithQueryItems:components.queryItems];
-    NSString *code = dictionary[OAuthCodeKey];
+    NSString *state = dictionary[OAuthStateKey];
+    NSString *code;
+    if ((state == nil && self.state == nil) || [state isEqualToString:self.state]) {
+        code = [self codeWithDictionary:dictionary error:error];
+    } else {
+        code = nil;
+        *error = self.stateError;
+    }
+    
     return code;
 }
 
-- (OAuthCredential *)credentialWithURL:(NSURL *)URL {
+- (OAuthCredential *)credentialWithURL:(NSURL *)URL error:(NSError **)error {
     NSURLComponents *components = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     
-    NSMutableArray *queryItems = components.queryItems.mutableCopy;
-    components.query = components.fragment;
-    [queryItems addObjectsFromArray:components.queryItems];
+    NSDictionary *dictionary = [self dictionaryWithQueryItems:components.queryItems];
+    NSString *state = dictionary[OAuthStateKey];
+    OAuthCredential *credential;
+    if ((state == nil && self.state == nil) || [state isEqualToString:self.state]) {
+        components.query = components.fragment;
+        dictionary = [self dictionaryWithQueryItems:components.queryItems];
+        credential = [self credentialWithDictionary:dictionary error:error];
+    } else {
+        credential = nil;
+        *error = self.stateError;
+    }
     
-    NSDictionary *dictionary = [self dictionaryWithQueryItems:queryItems];
-    OAuthCredential *credential = [self credentialWithDictionary:dictionary];
     return credential;
 }
 
@@ -305,15 +330,18 @@ static NSString *const OAuthMathAlgorithmHmacSha256 = @"hmac-sha-256";
     }
     
     [[request success:^(NSURLRequest *request) {
+        NSError *error = nil;
         NSDictionary *dictionary = request.json;
-        OAuthCredential *credential = [self credentialWithDictionary:dictionary];
-        [self invokeHandler:completion credential:credential error:nil];
-        NSLog(@"credential - %@", credential);
+        OAuthCredential *credential = [self credentialWithDictionary:dictionary error:&error];
+        [self invokeHandler:completion credential:credential error:error];
     }] failure:^(NSURLRequest *request) {
+        NSError *error1 = nil;
         NSDictionary *dictionary = request.json;
-        NSError *error = [self errorWithDictionary:dictionary underlyingError:request.error];
+        NSError *error = [self errorWithDictionary:dictionary underlyingError:request.error error:&error1];
+        if (!error) {
+            error = error1;
+        }
         [self invokeHandler:completion credential:nil error:error];
-        NSLog(@"error - %@", error);
     }];
     
     return request;
@@ -393,7 +421,12 @@ static NSString *const OAuthMathAlgorithmHmacSha256 = @"hmac-sha-256";
     }
 }
 
-- (OAuthCredential *)credentialWithDictionary:(NSDictionary *)dictionary {
+- (NSString *)codeWithDictionary:(NSDictionary *)dictionary error:(NSError **)anError {
+    NSString *code = dictionary[OAuthCodeKey];
+    return code;
+}
+
+- (OAuthCredential *)credentialWithDictionary:(NSDictionary *)dictionary error:(NSError **)anError {
     OAuthCredential *credential = [OAuthCredential new];
     
     credential.accessToken = dictionary[OAuthAccessTokenKey];
@@ -411,7 +444,7 @@ static NSString *const OAuthMathAlgorithmHmacSha256 = @"hmac-sha-256";
     return credential;
 }
 
-- (NSError *)errorWithDictionary:(NSDictionary *)dictionary underlyingError:(NSError *)underlyingError {
+- (NSError *)errorWithDictionary:(NSDictionary *)dictionary underlyingError:(NSError *)underlyingError error:(NSError **)anError {
     
     NSString *key = dictionary[OAuthErrorKey];
     NSString *description = dictionary[OAuthErrorDescriptionKey];
@@ -419,7 +452,7 @@ static NSString *const OAuthMathAlgorithmHmacSha256 = @"hmac-sha-256";
     
     if (!description) {
         NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-        description = [bundle localizedStringForKey:key value:key table:@"Errors"];
+        description = [bundle localizedStringForKey:key value:key table:OAuthErrorsTable];
     }
     
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];

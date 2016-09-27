@@ -14,9 +14,13 @@
 		374392981D92772F005E1075 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 374392961D92772F005E1075 /* LaunchScreen.storyboard */; };
 		374392CF1D92E42F005E1075 /* NSURLRequest+App.m in Sources */ = {isa = PBXBuildFile; fileRef = 374392CE1D92E42F005E1075 /* NSURLRequest+App.m */; };
 		374393411D99771D005E1075 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 374393401D99771D005E1075 /* MainVC.m */; };
-		374393481D999870005E1075 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374392B71D92787C005E1075 /* OAuth.framework */; };
-		374393491D999870005E1075 /* OAuth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 374392B71D92787C005E1075 /* OAuth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		374393511D99BB20005E1075 /* OAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743933B1D9974CA005E1075 /* OAuthVC.m */; };
+		37EEF8811D9A734400AC52B6 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374392B71D92787C005E1075 /* OAuth.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		37EEF8821D9A734400AC52B6 /* OAuth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 374392B71D92787C005E1075 /* OAuth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37EEF8871D9A749A00AC52B6 /* Helpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEF8861D9A749A00AC52B6 /* Helpers.framework */; };
+		37EEF8881D9A749A00AC52B6 /* Helpers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEF8861D9A749A00AC52B6 /* Helpers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37EEF88A1D9A749E00AC52B6 /* URLTransaction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEF8891D9A749E00AC52B6 /* URLTransaction.framework */; };
+		37EEF88B1D9A749E00AC52B6 /* URLTransaction.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEF8891D9A749E00AC52B6 /* URLTransaction.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +31,7 @@
 			remoteGlobalIDString = 374392711D9276F5005E1075;
 			remoteInfo = OAuth;
 		};
-		3743934A1D999870005E1075 /* PBXContainerItemProxy */ = {
+		37EEF8831D9A734400AC52B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 374392B01D92787C005E1075 /* Framework.xcodeproj */;
 			proxyType = 1;
@@ -37,13 +41,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3743934C1D999870005E1075 /* Embed Frameworks */ = {
+		37EEF8851D9A734400AC52B6 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				374393491D999870005E1075 /* OAuth.framework in Embed Frameworks */,
+				37EEF8881D9A749A00AC52B6 /* Helpers.framework in Embed Frameworks */,
+				37EEF88B1D9A749E00AC52B6 /* URLTransaction.framework in Embed Frameworks */,
+				37EEF8821D9A734400AC52B6 /* OAuth.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +72,8 @@
 		3743933B1D9974CA005E1075 /* OAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthVC.m; sourceTree = "<group>"; };
 		3743933F1D99771D005E1075 /* MainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainVC.h; sourceTree = "<group>"; };
 		374393401D99771D005E1075 /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
+		37EEF8861D9A749A00AC52B6 /* Helpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Helpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEF8891D9A749E00AC52B6 /* URLTransaction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = URLTransaction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +81,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				374393481D999870005E1075 /* OAuth.framework in Frameworks */,
+				37EEF8871D9A749A00AC52B6 /* Helpers.framework in Frameworks */,
+				37EEF88A1D9A749E00AC52B6 /* URLTransaction.framework in Frameworks */,
+				37EEF8811D9A734400AC52B6 /* OAuth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +93,8 @@
 		3743927C1D92772F005E1075 = {
 			isa = PBXGroup;
 			children = (
+				37EEF8891D9A749E00AC52B6 /* URLTransaction.framework */,
+				37EEF8861D9A749A00AC52B6 /* Helpers.framework */,
 				374392B01D92787C005E1075 /* Framework.xcodeproj */,
 				374392871D92772F005E1075 /* App */,
 				374392861D92772F005E1075 /* Products */,
@@ -143,12 +155,12 @@
 				374392811D92772F005E1075 /* Sources */,
 				374392821D92772F005E1075 /* Frameworks */,
 				374392831D92772F005E1075 /* Resources */,
-				3743934C1D999870005E1075 /* Embed Frameworks */,
+				37EEF8851D9A734400AC52B6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3743934B1D999870005E1075 /* PBXTargetDependency */,
+				37EEF8841D9A734400AC52B6 /* PBXTargetDependency */,
 			);
 			name = App;
 			productName = App;
@@ -234,10 +246,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3743934B1D999870005E1075 /* PBXTargetDependency */ = {
+		37EEF8841D9A734400AC52B6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OAuth;
-			targetProxy = 3743934A1D999870005E1075 /* PBXContainerItemProxy */;
+			targetProxy = 37EEF8831D9A734400AC52B6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -356,6 +368,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = PAY4ERVB97;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -369,6 +382,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = PAY4ERVB97;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -31,11 +31,33 @@
 #pragma mark - Web view
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    return YES;
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
     
+    BOOL load = YES;
+    NSURL *URL = request.URL;
+    
+    if ([URL.absoluteString hasPrefix:self.client.clientEndpoint]) {
+        
+        load = NO;
+        
+        if ([self.client.grantType isEqualToString:OAuthGrantTypeAuthorizationCode]) {
+            NSError *error = nil;
+            NSString *code = [self.client codeWithURL:URL error:&error];
+            if (code) {
+                self.client.code = code;
+                [self.client getCredential:^(OAuthCredential *credential, NSError *error) {
+                    [self webView:self.webView didReceiveCredential:credential withError:error];
+                }];
+            } else {
+                [self webView:self.webView didReceiveCredential:nil withError:error];
+            }
+        } else if ([self.client.grantType isEqualToString:OAuthGrantTypeImplicit]) {
+            NSError *error = nil;
+            OAuthCredential *credential = [self.client credentialWithURL:URL error:&error];
+            [self webView:self.webView didReceiveCredential:credential withError:error];
+        }
+    }
+    
+    return load;
 }
 
 - (void)webView:(UIWebView *)webView didReceiveCredential:(OAuthCredential *)credential withError:(NSError *)error {
