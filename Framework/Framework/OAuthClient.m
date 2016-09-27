@@ -26,6 +26,8 @@ static NSString *const OAuthTokenTypeKey = @"token_type";
 static NSString *const OAuthExpiresInKey = @"expires_in";
 static NSString *const OAuthRefreshTokenKey = @"refresh_token";
 static NSString *const OAuthCodeKey = @"code";
+static NSString *const OAuthMacKeyKey = @"mac_key";
+static NSString *const OAuthMacAlgorithmKey = @"mac_algorithm";
 
 static NSString *const OAuthErrorKey = @"error";
 static NSString *const OAuthErrorDescriptionKey = @"error_description";
@@ -46,6 +48,13 @@ static NSString *const OAuthRefreshToken = @"refresh_token";
 static NSString *const OAuthResponseTypeCode = @"code";
 static NSString *const OAuthResponseTypeToken = @"token";
 
+static NSString *const OAuthTokenTypeBearer = @"bearer";
+static NSString *const OAuthTokenTypeMac = @"mac";
+
+static NSString *const OAuthMathAlgorithmHmacSha1 = @"hmac-sha-1";
+static NSString *const OAuthMathAlgorithmHmacSha256 = @"hmac-sha-256";
+
+
 
 
 
@@ -62,6 +71,9 @@ static NSString *const OAuthResponseTypeToken = @"token";
 @property NSDate *expirationDate;
 @property NSString *refreshToken;
 
+@property NSString *macKey;
+@property NSString *macAlgorithm;
+
 @end
 
 
@@ -77,6 +89,8 @@ static NSString *const OAuthResponseTypeToken = @"token";
         self.tokenType = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(tokenType))];
         self.expirationDate = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(expirationDate))];
         self.refreshToken = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(refreshToken))];
+        self.macKey = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(macKey))];
+        self.macAlgorithm = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(macAlgorithm))];
     }
     return self;
 }
@@ -86,6 +100,8 @@ static NSString *const OAuthResponseTypeToken = @"token";
     [aCoder encodeObject:self.tokenType forKey:NSStringFromSelector(@selector(tokenType))];
     [aCoder encodeObject:self.expirationDate forKey:NSStringFromSelector(@selector(expirationDate))];
     [aCoder encodeObject:self.refreshToken forKey:NSStringFromSelector(@selector(refreshToken))];
+    [aCoder encodeObject:self.macKey forKey:NSStringFromSelector(@selector(macKey))];
+    [aCoder encodeObject:self.macAlgorithm forKey:NSStringFromSelector(@selector(macAlgorithm))];
 }
 
 #pragma mark - Accessors
@@ -100,8 +116,10 @@ static NSString *const OAuthResponseTypeToken = @"token";
     NSString *tokenType = [NSString stringWithFormat:@"%@ - %@", OAuthTokenTypeKey, self.tokenType];
     NSString *expiresIn = [NSString stringWithFormat:@"%@ - %f", OAuthExpiresInKey, [self.expirationDate timeIntervalSinceNow]];
     NSString *refreshToken = [NSString stringWithFormat:@"%@ - %@", OAuthRefreshTokenKey, self.refreshToken];
+    NSString *macKey = [NSString stringWithFormat:@"%@ - %@", OAuthMacKeyKey, self.macKey];
+    NSString *macAlgorithm = [NSString stringWithFormat:@"%@ - %@", OAuthMacAlgorithmKey, self.macAlgorithm];
     
-    NSArray *descriptions = @[accessToken, tokenType, expiresIn, refreshToken];
+    NSArray *descriptions = @[accessToken, tokenType, expiresIn, refreshToken, macKey, macAlgorithm];
     NSString *description = [descriptions componentsJoinedByString:@"\n"];
     
     return description;
@@ -126,6 +144,37 @@ static NSString *const OAuthResponseTypeToken = @"token";
     NSData *data = keychain.credential;
     OAuthCredential *credential = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     return credential;
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
+@implementation NSMutableURLRequest (OAuth)
+
+- (void)setOAuthCredential:(OAuthCredential *)credential {
+    
+    NSString *value;
+    
+    if ([credential.tokenType.lowercaseString isEqualToString:OAuthTokenTypeBearer]) {
+        value = [NSString stringWithFormat:@"%@ %@", credential.tokenType.capitalizedString, credential.accessToken];
+    } else if ([credential.tokenType.lowercaseString isEqualToString:OAuthTokenTypeMac]) {
+        // TODO: mac token type
+        if ([credential.macAlgorithm isEqualToString:OAuthMathAlgorithmHmacSha1]) {
+            
+        } else if ([credential.macAlgorithm isEqualToString:OAuthMathAlgorithmHmacSha256]) {
+            
+        }
+    }
+    
+    [self setValue:value forHTTPHeaderField:@"Authorization"];
 }
 
 @end
@@ -350,6 +399,8 @@ static NSString *const OAuthResponseTypeToken = @"token";
     credential.accessToken = dictionary[OAuthAccessTokenKey];
     credential.tokenType = dictionary[OAuthTokenTypeKey];
     credential.refreshToken = dictionary[OAuthRefreshTokenKey];
+    credential.macKey = dictionary[OAuthMacKeyKey];
+    credential.macAlgorithm = dictionary[OAuthMacAlgorithmKey];
     
     credential.expirationDate = [NSDate distantFuture];
     NSNumber *expiresIn = dictionary[OAuthExpiresInKey];

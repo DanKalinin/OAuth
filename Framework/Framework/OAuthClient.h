@@ -36,11 +36,28 @@ typedef NS_ENUM(NSInteger, OAuthAuthenticationScheme) {
 @property (readonly) NSString *tokenType;
 @property (readonly) NSDate *expirationDate;
 @property (readonly) NSString *refreshToken;
+@property (readonly) NSString *macKey;
+@property (readonly) NSString *macAlgorithm;
 
 - (BOOL)expired;
 
 - (void)exportToKeychain:(NSString *)account;
 + (instancetype)importFromKeychain:(NSString *)account;
+
+@end
+
+
+
+
+
+
+
+
+
+
+@interface NSMutableURLRequest (OAuth)
+
+- (void)setOAuthCredential:(OAuthCredential *)credential;
 
 @end
 

@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		3743928A1D92772F005E1075 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 374392891D92772F005E1075 /* main.m */; };
 		3743928D1D92772F005E1075 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743928C1D92772F005E1075 /* AppDelegate.m */; };
-		374392901D92772F005E1075 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743928F1D92772F005E1075 /* ViewController.m */; };
 		374392931D92772F005E1075 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 374392911D92772F005E1075 /* Main.storyboard */; };
 		374392951D92772F005E1075 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 374392941D92772F005E1075 /* Assets.xcassets */; };
 		374392981D92772F005E1075 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 374392961D92772F005E1075 /* LaunchScreen.storyboard */; };
-		374392BC1D92790D005E1075 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374392B71D92787C005E1075 /* OAuth.framework */; };
-		374392BD1D92790D005E1075 /* OAuth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 374392B71D92787C005E1075 /* OAuth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		374392CF1D92E42F005E1075 /* NSURLRequest+App.m in Sources */ = {isa = PBXBuildFile; fileRef = 374392CE1D92E42F005E1075 /* NSURLRequest+App.m */; };
+		374393411D99771D005E1075 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 374393401D99771D005E1075 /* MainVC.m */; };
+		374393481D999870005E1075 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374392B71D92787C005E1075 /* OAuth.framework */; };
+		374393491D999870005E1075 /* OAuth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 374392B71D92787C005E1075 /* OAuth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		374393511D99BB20005E1075 /* OAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743933B1D9974CA005E1075 /* OAuthVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,7 +27,7 @@
 			remoteGlobalIDString = 374392711D9276F5005E1075;
 			remoteInfo = OAuth;
 		};
-		374392BE1D92790D005E1075 /* PBXContainerItemProxy */ = {
+		3743934A1D999870005E1075 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 374392B01D92787C005E1075 /* Framework.xcodeproj */;
 			proxyType = 1;
@@ -36,13 +37,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		374392C01D92790D005E1075 /* Embed Frameworks */ = {
+		3743934C1D999870005E1075 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				374392BD1D92790D005E1075 /* OAuth.framework in Embed Frameworks */,
+				374393491D999870005E1075 /* OAuth.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,8 +55,6 @@
 		374392891D92772F005E1075 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3743928B1D92772F005E1075 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3743928C1D92772F005E1075 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3743928E1D92772F005E1075 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3743928F1D92772F005E1075 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		374392921D92772F005E1075 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		374392941D92772F005E1075 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		374392971D92772F005E1075 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,6 +62,10 @@
 		374392B01D92787C005E1075 /* Framework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Framework.xcodeproj; path = ../Framework/Framework.xcodeproj; sourceTree = "<group>"; };
 		374392CD1D92E42F005E1075 /* NSURLRequest+App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+App.h"; sourceTree = "<group>"; };
 		374392CE1D92E42F005E1075 /* NSURLRequest+App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+App.m"; sourceTree = "<group>"; };
+		3743933A1D9974CA005E1075 /* OAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthVC.h; sourceTree = "<group>"; };
+		3743933B1D9974CA005E1075 /* OAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthVC.m; sourceTree = "<group>"; };
+		3743933F1D99771D005E1075 /* MainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainVC.h; sourceTree = "<group>"; };
+		374393401D99771D005E1075 /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				374392BC1D92790D005E1075 /* OAuth.framework in Frameworks */,
+				374393481D999870005E1075 /* OAuth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,8 +102,10 @@
 			children = (
 				3743928B1D92772F005E1075 /* AppDelegate.h */,
 				3743928C1D92772F005E1075 /* AppDelegate.m */,
-				3743928E1D92772F005E1075 /* ViewController.h */,
-				3743928F1D92772F005E1075 /* ViewController.m */,
+				3743933F1D99771D005E1075 /* MainVC.h */,
+				374393401D99771D005E1075 /* MainVC.m */,
+				3743933A1D9974CA005E1075 /* OAuthVC.h */,
+				3743933B1D9974CA005E1075 /* OAuthVC.m */,
 				374392911D92772F005E1075 /* Main.storyboard */,
 				374392941D92772F005E1075 /* Assets.xcassets */,
 				374392961D92772F005E1075 /* LaunchScreen.storyboard */,
@@ -138,12 +143,12 @@
 				374392811D92772F005E1075 /* Sources */,
 				374392821D92772F005E1075 /* Frameworks */,
 				374392831D92772F005E1075 /* Resources */,
-				374392C01D92790D005E1075 /* Embed Frameworks */,
+				3743934C1D999870005E1075 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				374392BF1D92790D005E1075 /* PBXTargetDependency */,
+				3743934B1D999870005E1075 /* PBXTargetDependency */,
 			);
 			name = App;
 			productName = App;
@@ -161,6 +166,7 @@
 				TargetAttributes = {
 					374392841D92772F005E1075 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = PAY4ERVB97;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -217,9 +223,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				374392901D92772F005E1075 /* ViewController.m in Sources */,
 				3743928D1D92772F005E1075 /* AppDelegate.m in Sources */,
+				374393511D99BB20005E1075 /* OAuthVC.m in Sources */,
 				374392CF1D92E42F005E1075 /* NSURLRequest+App.m in Sources */,
+				374393411D99771D005E1075 /* MainVC.m in Sources */,
 				3743928A1D92772F005E1075 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,10 +234,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		374392BF1D92790D005E1075 /* PBXTargetDependency */ = {
+		3743934B1D999870005E1075 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OAuth;
-			targetProxy = 374392BE1D92790D005E1075 /* PBXContainerItemProxy */;
+			targetProxy = 3743934A1D999870005E1075 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -348,7 +355,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PAY4ERVB97;
 				INFOPLIST_FILE = App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dk.OAuthApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -359,7 +368,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PAY4ERVB97;
 				INFOPLIST_FILE = App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dk.OAuthApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
