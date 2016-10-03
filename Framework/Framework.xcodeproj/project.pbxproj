@@ -15,6 +15,10 @@
 		374392ED1D949FC0005E1075 /* Errors.strings in Resources */ = {isa = PBXBuildFile; fileRef = 374392EC1D949FC0005E1075 /* Errors.strings */; };
 		3743934F1D99A08E005E1075 /* OAuthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3743934D1D99A08E005E1075 /* OAuthViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		374393501D99A08E005E1075 /* OAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743934E1D99A08E005E1075 /* OAuthViewController.m */; };
+		376588B01DA2B08D00D83582 /* JSONSchema.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 376588AD1DA2B08100D83582 /* JSONSchema.framework */; };
+		37E9BBF61DA2B22700C82673 /* code.json in Resources */ = {isa = PBXBuildFile; fileRef = 37E9BBF51DA2B22700C82673 /* code.json */; };
+		37E9BBF81DA2B23B00C82673 /* credential.json in Resources */ = {isa = PBXBuildFile; fileRef = 37E9BBF71DA2B23B00C82673 /* credential.json */; };
+		37E9BBFA1DA2B26D00C82673 /* error.json in Resources */ = {isa = PBXBuildFile; fileRef = 37E9BBF91DA2B26D00C82673 /* error.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +36,20 @@
 			remoteGlobalIDString = 3717703C1D8B05BB0027C322;
 			remoteInfo = URLTransaction;
 		};
+		376588AC1DA2B08100D83582 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 376588A61DA2B08100D83582 /* Framework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 37EEF8961D9AD15800AC52B6;
+			remoteInfo = JSONSchema;
+		};
+		376588AE1DA2B08100D83582 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 376588A61DA2B08100D83582 /* Framework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 37EEF8E71D9D4C9C00AC52B6;
+			remoteInfo = JSONSchemaTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +65,10 @@
 		374393451D998FC0005E1075 /* OAuthWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthWebView.m; sourceTree = "<group>"; };
 		3743934D1D99A08E005E1075 /* OAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthViewController.h; sourceTree = "<group>"; };
 		3743934E1D99A08E005E1075 /* OAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthViewController.m; sourceTree = "<group>"; };
+		376588A61DA2B08100D83582 /* Framework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Framework.xcodeproj; path = ../../../../JSONSchema/Framework/Framework.xcodeproj; sourceTree = "<group>"; };
+		37E9BBF51DA2B22700C82673 /* code.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = code.json; sourceTree = "<group>"; };
+		37E9BBF71DA2B23B00C82673 /* credential.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = credential.json; sourceTree = "<group>"; };
+		37E9BBF91DA2B26D00C82673 /* error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +78,7 @@
 			files = (
 				374392BA1D9278C8005E1075 /* Helpers.framework in Frameworks */,
 				374392BB1D9278C8005E1075 /* URLTransaction.framework in Frameworks */,
+				376588B01DA2B08D00D83582 /* JSONSchema.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +112,7 @@
 				3743934E1D99A08E005E1075 /* OAuthViewController.m */,
 				374393441D998FC0005E1075 /* OAuthWebView.h */,
 				374393451D998FC0005E1075 /* OAuthWebView.m */,
+				37E9BBF01DA2B1BF00C82673 /* Schemas */,
 				374392751D9276F5005E1075 /* Info.plist */,
 				374392EC1D949FC0005E1075 /* Errors.strings */,
 			);
@@ -100,6 +124,7 @@
 			children = (
 				374392A21D92782B005E1075 /* Helpers */,
 				374392A31D92782B005E1075 /* URLTransaction */,
+				376588A31DA2B06C00D83582 /* JSONSchema */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -134,6 +159,33 @@
 				374392AF1D92784B005E1075 /* URLTransaction.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		376588A31DA2B06C00D83582 /* JSONSchema */ = {
+			isa = PBXGroup;
+			children = (
+				376588A61DA2B08100D83582 /* Framework.xcodeproj */,
+			);
+			path = JSONSchema;
+			sourceTree = "<group>";
+		};
+		376588A71DA2B08100D83582 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				376588AD1DA2B08100D83582 /* JSONSchema.framework */,
+				376588AF1DA2B08100D83582 /* JSONSchemaTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37E9BBF01DA2B1BF00C82673 /* Schemas */ = {
+			isa = PBXGroup;
+			children = (
+				37E9BBF51DA2B22700C82673 /* code.json */,
+				37E9BBF71DA2B23B00C82673 /* credential.json */,
+				37E9BBF91DA2B26D00C82673 /* error.json */,
+			);
+			path = Schemas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +249,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 376588A71DA2B08100D83582 /* Products */;
+					ProjectRef = 376588A61DA2B08100D83582 /* Framework.xcodeproj */;
+				},
+				{
 					ProductGroup = 374392A51D92783F005E1075 /* Products */;
 					ProjectRef = 374392A41D92783F005E1075 /* Framework.xcodeproj */;
 				},
@@ -227,6 +283,20 @@
 			remoteRef = 374392AE1D92784B005E1075 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		376588AD1DA2B08100D83582 /* JSONSchema.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JSONSchema.framework;
+			remoteRef = 376588AC1DA2B08100D83582 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		376588AF1DA2B08100D83582 /* JSONSchemaTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JSONSchemaTests.xctest;
+			remoteRef = 376588AE1DA2B08100D83582 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -234,6 +304,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37E9BBFA1DA2B26D00C82673 /* error.json in Resources */,
+				37E9BBF61DA2B22700C82673 /* code.json in Resources */,
+				37E9BBF81DA2B23B00C82673 /* credential.json in Resources */,
 				374392ED1D949FC0005E1075 /* Errors.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

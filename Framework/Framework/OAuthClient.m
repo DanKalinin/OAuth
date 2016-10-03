@@ -9,6 +9,7 @@
 #import "OAuthClient.h"
 #import <Helpers/Helpers.h>
 #import <URLTransaction/URLTransaction.h>
+#import <JSONSchema/JSONSchema.h>
 
 typedef void (^OAuthRequestHandler)(OAuthCredential *, NSError *);
 
@@ -57,6 +58,10 @@ static NSString *const OAuthMathAlgorithmHmacSha256 = @"hmac-sha-256";
 
 static NSString *const OAuthErrorsTable = @"Errors";
 static NSString *const OAuthStateErrorDescriptionKey = @"invalid_state";
+
+static NSString *const JSONSchemaCode = @"code";
+static NSString *const JSONSchemaCredential = @"credential";
+static NSString *const JSONSchemaError = @"error";
 
 
 
@@ -338,9 +343,7 @@ static NSString *const OAuthStateErrorDescriptionKey = @"invalid_state";
         NSError *error1 = nil;
         NSDictionary *dictionary = request.json;
         NSError *error = [self errorWithDictionary:dictionary underlyingError:request.error error:&error1];
-        if (!error) {
-            error = error1;
-        }
+        error = error ? error : error1;
         [self invokeHandler:completion credential:nil error:error];
     }];
     
@@ -422,11 +425,21 @@ static NSString *const OAuthStateErrorDescriptionKey = @"invalid_state";
 }
 
 - (NSString *)codeWithDictionary:(NSDictionary *)dictionary error:(NSError **)anError {
+    
+    JSONSchema *schema = [self schemaNamed:JSONSchemaCode];
+    BOOL valid = [schema validateObject:dictionary error:anError];
+    if (!valid) return nil;
+    
     NSString *code = dictionary[OAuthCodeKey];
     return code;
 }
 
 - (OAuthCredential *)credentialWithDictionary:(NSDictionary *)dictionary error:(NSError **)anError {
+    
+    JSONSchema *schema = [self schemaNamed:JSONSchemaCredential];
+    BOOL valid = [schema validateObject:dictionary error:anError];
+    if (!valid) return nil;
+    
     OAuthCredential *credential = [OAuthCredential new];
     
     credential.accessToken = dictionary[OAuthAccessTokenKey];
@@ -445,6 +458,10 @@ static NSString *const OAuthStateErrorDescriptionKey = @"invalid_state";
 }
 
 - (NSError *)errorWithDictionary:(NSDictionary *)dictionary underlyingError:(NSError *)underlyingError error:(NSError **)anError {
+    
+    JSONSchema *schema = [self schemaNamed:JSONSchemaError];
+    BOOL valid = [schema validateObject:dictionary error:anError];
+    if (!valid) return nil;
     
     NSString *key = dictionary[OAuthErrorKey];
     NSString *description = dictionary[OAuthErrorDescriptionKey];
@@ -470,6 +487,14 @@ static NSString *const OAuthStateErrorDescriptionKey = @"invalid_state";
         dictionary[queryItem.name] = queryItem.value;
     }
     return dictionary;
+}
+
+- (JSONSchema *)schemaNamed:(NSString *)name {
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSURL *URL = [bundle URLForResource:name withExtension:JSONExtension];
+    JSONSchema *schema = [[JSONSchema alloc] initWithURL:URL];
+    NSAssert(schema, name);
+    return schema;
 }
 
 @end

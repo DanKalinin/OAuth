@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2EAE61832618E21B45BA5E26E525B01F376F2099",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2EAE61832618E21B45BA5E26E525B01F376F2099" : 9223372036854775807,
+    "078E6104D13DDB7E626ECDABFAB4E3BAED514BBA" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A73EBA8D-1DF7-451C-B158-AC099F812063",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2EAE61832618E21B45BA5E26E525B01F376F2099" : "OAuth\/",
+    "078E6104D13DDB7E626ECDABFAB4E3BAED514BBA" : "JSONSchema\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "App",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "App\/App.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/DanKalinin\/JSONSchema.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "078E6104D13DDB7E626ECDABFAB4E3BAED514BBA"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/DanKalinin\/OAuth.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2EAE61832618E21B45BA5E26E525B01F376F2099"
+    }
+  ]
+}

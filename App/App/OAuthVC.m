@@ -32,7 +32,7 @@
     client.tokenEndpoint = @"/oauth/v2/token";
     client.clientEndpoint = @"http://client.ios";
     
-    client.grantType = OAuthGrantTypeImplicit;
+    client.grantType = OAuthGrantTypeAuthorizationCode;
     client.state = @"123";
     
     [self loadAuthorizationPageForClient:client];
@@ -40,6 +40,7 @@
 
 - (void)webView:(UIWebView *)webView didReceiveCredential:(OAuthCredential *)credential withError:(NSError *)error {
     NSLog(@"credential ----- %@", credential);
+    NSLog(@"error ----- %@", error);
 }
 
 @end

@@ -15,6 +15,8 @@
 		374392CF1D92E42F005E1075 /* NSURLRequest+App.m in Sources */ = {isa = PBXBuildFile; fileRef = 374392CE1D92E42F005E1075 /* NSURLRequest+App.m */; };
 		374393411D99771D005E1075 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 374393401D99771D005E1075 /* MainVC.m */; };
 		374393511D99BB20005E1075 /* OAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743933B1D9974CA005E1075 /* OAuthVC.m */; };
+		37E9BBEE1DA2B14C00C82673 /* JSONSchema.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 376588B61DA2B10A00D83582 /* JSONSchema.framework */; };
+		37E9BBEF1DA2B14C00C82673 /* JSONSchema.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 376588B61DA2B10A00D83582 /* JSONSchema.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EEF8811D9A734400AC52B6 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374392B71D92787C005E1075 /* OAuth.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		37EEF8821D9A734400AC52B6 /* OAuth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 374392B71D92787C005E1075 /* OAuth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EEF8871D9A749A00AC52B6 /* Helpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEF8861D9A749A00AC52B6 /* Helpers.framework */; };
@@ -50,6 +52,7 @@
 				37EEF8881D9A749A00AC52B6 /* Helpers.framework in Embed Frameworks */,
 				37EEF88B1D9A749E00AC52B6 /* URLTransaction.framework in Embed Frameworks */,
 				37EEF8821D9A734400AC52B6 /* OAuth.framework in Embed Frameworks */,
+				37E9BBEF1DA2B14C00C82673 /* JSONSchema.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,6 +75,7 @@
 		3743933B1D9974CA005E1075 /* OAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthVC.m; sourceTree = "<group>"; };
 		3743933F1D99771D005E1075 /* MainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainVC.h; sourceTree = "<group>"; };
 		374393401D99771D005E1075 /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
+		376588B61DA2B10A00D83582 /* JSONSchema.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JSONSchema.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEF8861D9A749A00AC52B6 /* Helpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Helpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEF8891D9A749E00AC52B6 /* URLTransaction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = URLTransaction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -84,6 +88,7 @@
 				37EEF8871D9A749A00AC52B6 /* Helpers.framework in Frameworks */,
 				37EEF88A1D9A749E00AC52B6 /* URLTransaction.framework in Frameworks */,
 				37EEF8811D9A734400AC52B6 /* OAuth.framework in Frameworks */,
+				37E9BBEE1DA2B14C00C82673 /* JSONSchema.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +98,7 @@
 		3743927C1D92772F005E1075 = {
 			isa = PBXGroup;
 			children = (
+				376588B61DA2B10A00D83582 /* JSONSchema.framework */,
 				37EEF8891D9A749E00AC52B6 /* URLTransaction.framework */,
 				37EEF8861D9A749A00AC52B6 /* Helpers.framework */,
 				374392B01D92787C005E1075 /* Framework.xcodeproj */,
