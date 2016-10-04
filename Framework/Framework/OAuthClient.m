@@ -340,10 +340,14 @@ static NSString *const JSONSchemaError = @"error";
         OAuthCredential *credential = [self credentialWithDictionary:dictionary error:&error];
         [self invokeHandler:completion credential:credential error:error];
     }] failure:^(NSURLRequest *request) {
-        NSError *error1 = nil;
-        NSDictionary *dictionary = request.json;
-        NSError *error = [self errorWithDictionary:dictionary underlyingError:request.error error:&error1];
-        error = error ? error : error1;
+        NSError *error = nil;
+        if ([request.error.domain isEqualToString:HTTPErrorDomain]) {
+            NSDictionary *dictionary = request.json;
+            NSError *error = [self errorWithDictionary:dictionary underlyingError:request.error error:nil];
+            error = error ? error : request.error;
+        } else {
+            error = request.error;
+        }
         [self invokeHandler:completion credential:nil error:error];
     }];
     

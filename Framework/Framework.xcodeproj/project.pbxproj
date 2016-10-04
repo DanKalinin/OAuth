@@ -61,8 +61,6 @@
 		374392D31D9342BA005E1075 /* OAuthClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthClient.h; sourceTree = "<group>"; };
 		374392D41D9342BA005E1075 /* OAuthClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthClient.m; sourceTree = "<group>"; };
 		374392EC1D949FC0005E1075 /* Errors.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Errors.strings; sourceTree = "<group>"; };
-		374393441D998FC0005E1075 /* OAuthWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthWebView.h; sourceTree = "<group>"; };
-		374393451D998FC0005E1075 /* OAuthWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthWebView.m; sourceTree = "<group>"; };
 		3743934D1D99A08E005E1075 /* OAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthViewController.h; sourceTree = "<group>"; };
 		3743934E1D99A08E005E1075 /* OAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthViewController.m; sourceTree = "<group>"; };
 		376588A61DA2B08100D83582 /* Framework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Framework.xcodeproj; path = ../../../../JSONSchema/Framework/Framework.xcodeproj; sourceTree = "<group>"; };
@@ -110,8 +108,6 @@
 				374392D41D9342BA005E1075 /* OAuthClient.m */,
 				3743934D1D99A08E005E1075 /* OAuthViewController.h */,
 				3743934E1D99A08E005E1075 /* OAuthViewController.m */,
-				374393441D998FC0005E1075 /* OAuthWebView.h */,
-				374393451D998FC0005E1075 /* OAuthWebView.m */,
 				37E9BBF01DA2B1BF00C82673 /* Schemas */,
 				374392751D9276F5005E1075 /* Info.plist */,
 				374392EC1D949FC0005E1075 /* Errors.strings */,
