@@ -321,8 +321,8 @@ static NSString *const JSONSchemaError = @"error";
     NSData *queryData = [queryString dataUsingEncoding:NSUTF8StringEncoding];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:components.URL];
-    request.HTTPMethod = @"POST";
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    request.HTTPMethod = HTTPMethodPost;
+    [request setValue:MediaTypeApplicationForm forHTTPHeaderField:HTTPHeaderFieldContentType];
     request.HTTPBody = queryData;
     
     if (self.authenticationScheme == OAuthAuthenticationSchemeHTTPBasic) {
@@ -331,7 +331,7 @@ static NSString *const JSONSchemaError = @"error";
         NSString *encodedCredential = [credentialData base64EncodedStringWithOptions:0];
         
         NSString *value = [NSString stringWithFormat:@"Basic %@", encodedCredential];
-        [request setValue:value forHTTPHeaderField:@"Authorization"];
+        [request setValue:value forHTTPHeaderField:HTTPHeaderFieldAuthorization];
     }
     
     [[request success:^(NSURLRequest *request) {
