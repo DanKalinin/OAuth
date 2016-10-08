@@ -430,7 +430,7 @@ static NSString *const JSONSchemaError = @"error";
 
 - (NSString *)codeWithDictionary:(NSDictionary *)dictionary error:(NSError **)anError {
     
-    JSONSchema *schema = [self schemaNamed:JSONSchemaCode];
+    JSONSchema *schema = [self JSONSchemaNamed:JSONSchemaCode];
     BOOL valid = [schema validateObject:dictionary error:anError];
     if (!valid) return nil;
     
@@ -440,7 +440,7 @@ static NSString *const JSONSchemaError = @"error";
 
 - (OAuthCredential *)credentialWithDictionary:(NSDictionary *)dictionary error:(NSError **)anError {
     
-    JSONSchema *schema = [self schemaNamed:JSONSchemaCredential];
+    JSONSchema *schema = [self JSONSchemaNamed:JSONSchemaCredential];
     BOOL valid = [schema validateObject:dictionary error:anError];
     if (!valid) return nil;
     
@@ -463,7 +463,7 @@ static NSString *const JSONSchemaError = @"error";
 
 - (NSError *)errorWithDictionary:(NSDictionary *)dictionary underlyingError:(NSError *)underlyingError error:(NSError **)anError {
     
-    JSONSchema *schema = [self schemaNamed:JSONSchemaError];
+    JSONSchema *schema = [self JSONSchemaNamed:JSONSchemaError];
     BOOL valid = [schema validateObject:dictionary error:anError];
     if (!valid) return nil;
     
@@ -491,14 +491,6 @@ static NSString *const JSONSchemaError = @"error";
         dictionary[queryItem.name] = queryItem.value;
     }
     return dictionary;
-}
-
-- (JSONSchema *)schemaNamed:(NSString *)name {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSURL *URL = [bundle URLForResource:name withExtension:JSONExtension];
-    JSONSchema *schema = [[JSONSchema alloc] initWithURL:URL];
-    NSAssert(schema, name);
-    return schema;
 }
 
 @end
