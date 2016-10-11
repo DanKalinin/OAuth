@@ -115,7 +115,7 @@ static NSString *const JSONSchemaError = @"error";
 #pragma mark - Accessors
 
 - (BOOL)expired {
-    BOOL expired = [self.expirationDate timeIntervalSinceNow] > 0.0;
+    BOOL expired = [self.expirationDate timeIntervalSinceNow] <= 0.0;
     return expired;
 }
 
