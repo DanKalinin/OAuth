@@ -11,8 +11,6 @@
 #import <URLTransaction/URLTransaction.h>
 #import <JSONSchema/JSONSchema.h>
 
-typedef void (^OAuthRequestHandler)(OAuthCredential *, NSError *);
-
 NSString *const OAuthErrorDomain = @"OAuthErrorDomain";
 
 NSString *const OAuthGrantTypeAuthorizationCode = @"authorization_code";
@@ -229,8 +227,7 @@ static NSString *const JSONSchemaError = @"error";
         
         self.grantType = OAuthGrantTypeAuthorizationCode;
         
-        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-        NSString *description = [bundle localizedStringForKey:OAuthStateErrorDescriptionKey value:OAuthStateErrorDescriptionKey table:OAuthErrorsTable];
+        NSString *description = [self.bundle localizedStringForKey:OAuthStateErrorDescriptionKey value:OAuthStateErrorDescriptionKey table:OAuthErrorsTable];
         NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
         userInfo[NSLocalizedDescriptionKey] = description;
         self.stateError = [NSError errorWithDomain:OAuthErrorDomain code:0 userInfo:userInfo];
@@ -343,7 +340,7 @@ static NSString *const JSONSchemaError = @"error";
         NSError *error = nil;
         if ([request.error.domain isEqualToString:HTTPErrorDomain]) {
             NSDictionary *dictionary = request.json;
-            NSError *error = [self errorWithDictionary:dictionary underlyingError:request.error error:nil];
+            error = [self errorWithDictionary:dictionary underlyingError:request.error error:nil];
             error = error ? error : request.error;
         } else {
             error = request.error;
@@ -472,8 +469,7 @@ static NSString *const JSONSchemaError = @"error";
     NSString *uri = dictionary[OAuthErrorUriKey];
     
     if (!description) {
-        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-        description = [bundle localizedStringForKey:key value:key table:OAuthErrorsTable];
+        description = [self.bundle localizedStringForKey:key value:key table:OAuthErrorsTable];
     }
     
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];

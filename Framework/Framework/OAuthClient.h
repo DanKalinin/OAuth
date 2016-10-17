@@ -72,6 +72,8 @@ typedef NS_ENUM(NSInteger, OAuthAuthenticationScheme) {
 
 @interface OAuthClient : NSObject
 
+typedef void (^OAuthRequestHandler)(OAuthCredential *credential, NSError *error);
+
 - (instancetype)initWithAuthorizationServerBaseComponents:(NSURLComponents *)authorizationServerBaseComponents clientId:(NSString *)clientId clientSecret:(NSString *)clientSecret;
 @property (readonly) NSURLComponents *authorizationServerBaseComponents;
 @property (readonly) NSString *clientId;
@@ -91,8 +93,8 @@ typedef NS_ENUM(NSInteger, OAuthAuthenticationScheme) {
 @property NSString *password;
 
 - (NSURLRequest *)authorizationRequest;
-- (void)getCredential:(void (^)(OAuthCredential *credential, NSError *error))completion;
-- (void)refreshCredential:(OAuthCredential *)oldCredential completion:(void (^)(OAuthCredential *newCredential, NSError *error))completion;
+- (void)getCredential:(OAuthRequestHandler)completion;
+- (void)refreshCredential:(OAuthCredential *)oldCredential completion:(OAuthRequestHandler)completion;
 
 - (NSString *)codeWithURL:(NSURL *)URL error:(NSError **)error;
 - (OAuthCredential *)credentialWithURL:(NSURL *)URL error:(NSError **)error;
