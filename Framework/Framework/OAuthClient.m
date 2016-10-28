@@ -11,7 +11,7 @@
 #import <URLTransaction/URLTransaction.h>
 #import <JSONSchema/JSONSchema.h>
 
-NSString *const OAuthErrorDomain = @"OAuthErrorDomain";
+NSErrorDomain const OAuthErrorDomain = @"OAuthErrorDomain";
 
 NSString *const OAuthGrantTypeAuthorizationCode = @"authorization_code";
 NSString *const OAuthGrantTypeImplicit = @"implicit";
