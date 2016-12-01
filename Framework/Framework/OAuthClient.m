@@ -427,7 +427,7 @@ static NSString *const JSONSchemaError = @"error";
 
 - (NSString *)codeWithDictionary:(NSDictionary *)dictionary error:(NSError **)anError {
     
-    JSONSchema *schema = [self JSONSchemaNamed:JSONSchemaCode];
+    JSONSchema *schema = [OAuthClient JSONSchemaNamed:JSONSchemaCode];
     BOOL valid = [schema validateObject:dictionary error:anError];
     if (!valid) return nil;
     
@@ -437,7 +437,7 @@ static NSString *const JSONSchemaError = @"error";
 
 - (OAuthCredential *)credentialWithDictionary:(NSDictionary *)dictionary error:(NSError **)anError {
     
-    JSONSchema *schema = [self JSONSchemaNamed:JSONSchemaCredential];
+    JSONSchema *schema = [OAuthClient JSONSchemaNamed:JSONSchemaCredential];
     BOOL valid = [schema validateObject:dictionary error:anError];
     if (!valid) return nil;
     
@@ -460,7 +460,7 @@ static NSString *const JSONSchemaError = @"error";
 
 - (NSError *)errorWithDictionary:(NSDictionary *)dictionary underlyingError:(NSError *)underlyingError error:(NSError **)anError {
     
-    JSONSchema *schema = [self JSONSchemaNamed:JSONSchemaError];
+    JSONSchema *schema = [OAuthClient JSONSchemaNamed:JSONSchemaError];
     BOOL valid = [schema validateObject:dictionary error:anError];
     if (!valid) return nil;
     
